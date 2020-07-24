@@ -1,0 +1,104 @@
+{% extends 'shop/basic.html' %} {%block title%} {{product.product_name}} {% endblock %} {%block body%}
+
+<div class="container my-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="row">
+                <img src="/media/{{product.image}}" height=255 width="250">
+            </div><br>
+            <div class="row my-4 mx-4">
+                <div id=br{{product.id}} class="btn btn-primary mx-3">Buy Now</div>
+                <span id="divpr{{product.id}}" class="divpr">
+                    <button  id="pr{{product.id}}"  class="btn btn-primary cart">Add To Cart</button>
+                      </span>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <h5 id="namepr{{product.id}}">{{product.product_name}}</h5>
+            <p><b><span style='font-size:45px; color: red;'>&#8377;{{product.price}}</span></b></p>
+            <p>{{product.desc}}</p>
+        </div>
+    </div>
+</div>
+<footer style=" 
+position:absolute; 
+bottom:0;
+width:100%;
+height:50px;   
+background:#000;
+color: wheat;
+text-align: center;
+">
+    <p style="margin-top: 10px;"> Copyright &copy <a style="text-decoration:none; color: orangered;" href="#">Rish-hub.</a> All Rights Reserved | Contact Us: +91 9520313045</p>
+</footer>
+
+{% endblock %} {%block js %}
+<script>
+    //  document.write("hello")
+    if (localStorage.getItem("cart") == null) {
+        var cart = {};
+    } else {
+        cart = JSON.parse(localStorage.getItem("cart"));
+        document.getElementById("cart").innerHTML = Object.keys(cart).length;
+        updateCart(cart);
+    }
+
+    $('.cart').click(function() {
+
+        var ids = this.id.toString();
+        if (cart[ids] != undefined) {
+
+            cart[ids] = cart[ids] + 1;
+        } else {
+            cart[ids] = 1;
+        }
+
+        updateCart(cart);
+    });
+    //  for pop over of items in our cart
+    $('#popcart').popover();
+    updatePopover(cart);
+
+    function updatePopover(cart) {
+        var pop = "";
+        pop = pop + "<h5>cart of your items</h5><div class=' mx-2 my-2'>";
+        var i = 1;
+        for (var item in cart) {
+            pop = pop + "<b>" + i + "." + "</b>";
+            pop = pop + "  " + document.getElementById("name" + item).innerHTML + " " + "Qty:" + " " + cart[item] + "<br>";
+            i = i + 1;
+        }
+        pop = pop + "</div>"
+        $('#popcart').popover('show');
+        document.getElementById("popcart").setAttribute("data-content", pop);
+    }
+
+    function updateCart(cart) {
+        var sum = 0;
+        for (var item in cart) {
+            sum = sum + cart[item];
+            document.getElementById('div' + item).innerHTML = "<button id= 'minus" + item + "'class='btn btn-primary minus'>-</button> <span id='val" + item + "''>" + cart[item] + "</span> <button id='plus" + item + "' class='btn btn-primary plus'> + </button>";
+
+        }
+        localStorage.setItem("cart", JSON.stringify(cart));
+        document.getElementById("cart").innerHTML = sum;
+        updatePopover(cart);
+    }
+    $('.divpr').on("click", "button.minus", function() {
+        a = this.id.slice(7, );
+        cart['pr' + a] = cart['pr' + a] - 1;
+        cart['pr' + a] = Math.max(0, cart['pr' + a]);
+        document.getElementById('valpr' + a).innerHTML + cart['pr' + a];
+        updateCart(cart);
+
+    });
+    $('.divpr').on("click", "button.plus", function() {
+        a = this.id.slice(6, );
+        console.log("plus clicked")
+        cart['pr' + a] = cart['pr' + a] + 1;
+        document.getElementById('valpr' + a).innerHTML + cart['pr' + a];
+        updateCart(cart);
+    });
+</script>
+{% endblock %}
