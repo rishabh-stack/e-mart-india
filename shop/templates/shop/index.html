@@ -1,8 +1,21 @@
-{% extends 'shop/basic.html' %} {%block title%}Rish-hub {% endblock %} {%block css%}{% load static %}
+{% extends 'shop/basic.html' %} {%block title%} E-mart {% endblock %} {%block css%}{% load static %}
 <style>
+    html,
+    body {
+        background-color: lightgoldenrodyellow;
+        width: 100%;
+        margin: 0px;
+        padding: 0px;
+        overflow-x: hidden;
+    }
+    
     .col-md-3 {
         display: inline-block;
         margin-left: -4px;
+    }
+    
+    .card {
+        background-color: lightgoldenrodyellow;
     }
     
     .carousel-indicators.active {
@@ -12,6 +25,7 @@
     .col-md-3 img {
         width: 165px;
         height: 165px;
+        background-color: lightgoldenrodyellow;
     }
     
     .carousel-indicators li {
@@ -42,6 +56,16 @@
     body.no-padding {
         padding-left: 0;
         padding-right: 0;
+    }
+    
+    .banner-image {
+        padding-top: 400px;
+        padding-bottom: 180px;
+        text-align: center;
+        color: #f8f8f8;
+        width: auto;
+        background: url("{% static '/shop/ecom.jpg' %}") no-repeat center;
+        background-size: cover;
     }
     /*  */
     /* Full-width input fields */
@@ -107,7 +131,7 @@ background:#000;
 color: wheat;
 text-align: center;
 ">
-    <p style="margin-top: 10px;"> Copyright &copy <a style="text-decoration:none; color: orangered;" href="#">Rish-hub.</a> All Rights Reserved | Contact Us: +91 9520313045</p>
+    <p style="margin-top: 10px;"> Copyright &copy <a style="text-decoration:none; color: orangered;" href="#">E-mart.</a> All Rights Reserved | Contact Us: +91 9520313045</p>
 </footer>
 
 {%endblock%} {%block js %}

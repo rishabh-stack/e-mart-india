@@ -1,7 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.contrib.auth.models import User
+from django.contrib import messages
 from math import ceil
 from .models import Product,Contact,Order,OrderUpdate
+from django.contrib.auth import authenticate,login,logout
 import json
 
 # Create your views here.
@@ -81,22 +84,61 @@ def prodview(request,myid):
     print(product)
     dic={"product":product[0]}
     return render(request,"shop/prodview.html",dic)
+
 def tracker(request):
     if request.method=="POST":
         orderId = request.POST.get('orderId', '')
-        email = request.POST.get('email', '')
+        email25 = request.POST.get('email25', '')
         try:
-            order = Order.objects.filter(order_id=orderId, email=email)
+            order = Order.objects.filter(order_id=orderId, email=email25)
             if len(order)>0:
                 update = OrderUpdate.objects.filter(order_id=orderId)
                 updates = []
                 for item in update:
-                    updates.append({'text': item.update_desc, 'time': (item.datestamp,item.timestamp)})
-                    response = json.dumps({"status":"success","updates":updates, "itemsJson":order[0].items_json}, default=str)
+                    updates.append({'text': item.update_desc, 'time': item.timestamp})
+                    response = json.dumps({"status":"success", "updates": updates, "itemsJson": order[0].items_json}, default=str)
                 return HttpResponse(response)
             else:
-                return HttpResponse('{"status":"no items"}')
+                return HttpResponse('{"status":"noitem"}')
         except Exception as e:
-            return HttpResponse('{"status":"error"}')
+            return HttpResponse(f'{e}')
 
     return render(request, 'shop/tracker.html')
+
+def handlesignUp(request):
+    if request.method == 'POST':
+        username=request.POST['username']
+        first=request.POST['first']
+        last=request.POST['last']
+        email=request.POST['email']
+        password=request.POST['pass1']
+
+        myuser=User.objects.create_user(username,email,password)
+        myuser.first_name=first
+        myuser.last_name=last
+        myuser.save()
+        messages.success(request,f" {first} -- Your E-mart account has been successfully created")
+        return redirect('/')
+        
+
+
+    else:
+        return render(request, 'shop/404.html')
+
+def handlelogin(request):
+    if request.method == 'POST':
+        loginusername=request.POST['loginusername']
+        loginpassword=request.POST['loginpassword']
+        user=authenticate(username=loginusername,passsword=loginpassword)
+        if user is not None:
+            login(request,user)
+            messages.success(request," successfully logged in")
+            return redirect('/')
+        else:
+            messages.error(request,"Sorry invalid credentials please try again")
+            return redirect('/')
+    return HttpResponse('handle loginin')
+
+
+def handlelogout(request):
+    return HttpResponse("logout")
