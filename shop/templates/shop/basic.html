@@ -2,13 +2,14 @@
 <html lang="en">
 
 <head>
+    {% load static %}
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
+    <link rel="icon" href="{% static '/shop/ecom.jpg' %}" style="border-radius: 200px;" type="image/png">
     <title>{%block title%} {% endblock %}</title>
 
     {%block css%} {% endblock %}
@@ -18,7 +19,7 @@
 </head>
 
 <body>
-    {% load static %}
+
     <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: black;">
         <a class="navbar-brand" href="#">E-mart <sup style="text-size-adjust: 2px; font-size:x-small;">IN</sup></a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
