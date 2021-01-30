@@ -27,7 +27,7 @@ SECRET_KEY = '1-_fst_q&xk2$%osxid05e8o46^wq*yc5=*=*gy)06mm!vwsn7'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['e-mart-india.herokuapp.com']
+ALLOWED_HOSTS = ['127.0.0.1','e-mart-india.herokuapp.com']
 
 
 # Application definition
