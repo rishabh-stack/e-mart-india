@@ -35,6 +35,7 @@ def searchMatch(query,item):
 def search(request):
     query=request.GET.get('search')
     allprods=[]
+    message=''
     catprods=Product.objects.values("category","id")
     cats={item["category"] for item in catprods}
     for cat in cats:
@@ -42,10 +43,13 @@ def search(request):
         prod=[item for item in prodtemp if searchMatch(query,item)]
         n=len(prod)
         ns=n//4 + ceil((n/4)-(n//4))
+        if len(prod)==0:
+            message="result not found"
         if len(prod)!=0:
             allprods.append([prod,range(1,ns),ns])
-    params={"allprods":allprods}
-    return render(request,"shop/search.html",params)
+            message="result found"
+    params={"allprods":allprods,"message":message}
+    return render(request,"search.html",params)
 def about(request):
     return render(request,"shop/about.html")
 
