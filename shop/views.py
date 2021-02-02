@@ -89,6 +89,9 @@ def prodview(request,myid):
     dic={"product":product[0]}
     return render(request,"shop/prodview.html",dic)
 
+def privacy(request):
+    return render(request,"shop/privacy.html")
+
 def tracker(request):
     if request.method=="POST":
         orderId = request.POST.get('orderId', '')
