@@ -49,7 +49,7 @@ def search(request):
             allprods.append([prod,range(1,ns),ns])
             message="result found"
     params={"allprods":allprods,"message":message}
-    return render(request,"search.html",params)
+    return render(request,"shop/search.html",params)
 def about(request):
     return render(request,"shop/about.html")
 
