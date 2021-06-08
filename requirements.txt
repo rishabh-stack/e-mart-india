@@ -11,7 +11,7 @@ django-crispy-forms==1.9.2
 filelock==3.0.12
 idna==2.10
 oauthlib==3.1.0
-Pillow==7.2.0
+Pillow==8.2.0
 pipenv==2018.11.26
 pycryptodome==3.9.8
 python3-openid==3.2.0
