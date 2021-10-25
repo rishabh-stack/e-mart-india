@@ -45,11 +45,62 @@
     }
     /*  */
     /* Full-width input fields */
+    .body- {
+  background: linear-gradient(0deg, #fff, 50%, #deeefe);
+  font-family: "Rubik", sans-serif !important;
+  background: #1e242a;
+  height: 100 !important;
+}
+
+footer {
+  color: #caced1 !important;
+}
+
+.row-1 {
+  background-color: #1e242a !important;
+}
+
+.text-hover:hover {
+  color: #fff;
+}
+
+a {
+  text-decoration: none !important;
+  color: #caced1 ;
+}
+.hover-github {
+  color: #fff;
+}
+.hover-github:hover {
+  color: #000;
+  transition: all 0.1s ease-in-out;
+}
+.hover-fb {
+  color: #fff;
+}
+.hover-fb:hover {
+  color: rgb(5, 5, 153);
+  transition: all 0.1s ease-in-out;
+}
+.hover-insta {
+  color: #fff;
+}
+.hover-insta:hover {
+  color: rgb(236, 86, 16);
+  transition: all 0.1s ease-in-out;
+}
+.hover-twitter {
+  color: #fff;
+}
+.hover-twitter:hover {
+  color: #55acee;
+  transition: all 0.1s ease-in-out;
+}
 </style>
 {% endblock %} {%block body%} {% load static %} {% for product,range,ns in allprods %}
 
 
-<div class="container">
+<div class="container" style="margin-top: 100px;">
     <h1 class="my-4">{{product.0.category}}</h1>
     <div class="row">
         <div id="demo{{forloop.counter}}" class=" col carousel slide my-3" data-ride="carousel">
@@ -96,17 +147,74 @@
     {% endfor %}
 
 </div>
-<footer style="
+<footer class="container-fluid mb-0 body- mt-5" style="
 left:0;
 position: absolute;
 width:100%;   
-background:#000;
-color: wheat;
 text-align: center;
 ">
-    <p> Copyright &copy <a style="text-decoration:none; color: orangered;" href="#">E-mart.</a> All Rights Reserved | Contact Us: +91 9520313045</p>
+<div class="row justify-content-center py-5">
+    <div class="col-12">
+        <div class="row">
+            <div class="col-md-2 col-sm-2 my-auto mx-auto ">
+                <h3 class="mb-md-0 mb-3 font-weight-bold  text-white">E-mart <sup style="text-size-adjust: 2px; font-size:x-small;">IN</sup></h3>
+                <div class=" d-sm-flex justify-content-start d-block pt-lg-3 mt-1 pb-3">
+               <a href="javascript:void(0)"><i class="fab fa-github fa-2x mr-lg-3 mr-2 hover-github"></i></a>
+               <a href="javascript:void(0)"><i class="fab fa-facebook fa-2x mr-lg-3 mr-2 hover-fb"></i></a>
+               <a href="javascript:void(0)"><i class="fab fa-instagram fa-2x mr-lg-3 mr-2 hover-insta"></i></a>
+               <a href="javascript:void(0)"><i class="fab fa-twitter fa-2x mr-lg-3 mr-2 hover-twitter"></i></a>
+               </div>
+            </div>
+            <div class=" col-md-2 col-sm-2 my-auto mx-auto">
+                <h6 class="mb-3 mb-lg-4 bold-text text-white"><b>Get to Know Us</b></h6>
+                <ul class="list-unstyled ">
+                    <li><a href="/shop" class="text-hover" >Home</a></li>
+                    <li><a href="/shop/about" class="text-hover">About Us</a></li>
+                    <li><a href="/shop/contact" class="text-hover">Contact Us</a></li>
+                    <li><a href="/blog" class="text-hover">Press</a></li>
+                </ul>
+            </div>
+            <div class=" col-md-2 col-sm-2">
+                <h6 class="mb-3 mb-lg-4 bold-text text-white"><b>Help</b></h6>
+                <ul class="list-unstyled">
+                <li><a href="javascript:void(0)" class="text-hover" >Payments</a></li>
+                    <li><a href="/shop/tracker" class="text-hover">Shipping</a></li>
+                    <li><a href="/shop/privacy-policy" class="text-hover">FAQ</a></li>
+                </ul>
+            </div>
+            <div class=" col-md-2 col-sm-2">
+                <h6 class="mb-3 mb-lg-4 bold-text text-white"><b>Policy</b></h6>
+                <ul class="list-unstyled">
+                    <li><a href="/shop/privacy-policy" class="text-hover" >Return Policy</a></li>
+                    <li><a href="/shop/privacy-policy" class="text-hover">Privacy</a></li>
+                    <li><a href="/shop/privacy-policy" class="text-hover">Security</a></li>
+                </ul>
+            </div>
+            <div class=" col-md-2 col-sm-2">
+                <h6 class="mb-3 mb-lg-4 bold-text text-white"><b>Mail Us</b></h6>
+                <ul class="list-unstyled">
+                    <li><a href="mailto:e-mart@gmail.com" class="text-hover" >e-mart@gmail.com</a></li>
+                </ul>
+            </div>
+            <div class=" col-md-2 col-sm-2">
+                <h6 class="mb-3 mb-lg-4 bold-text text-white mt-sm-0 mt-5"><b>Registered Office Address:</b></h6>
+                <ul class="list-unstyled">
+                <li>
+                    <a class="text-hover" href="https://g.page/JAYPEEAGRA?share" target="_blank">
+                                    <i class="fas fa-map-marker-alt"></i>
+                               
+                                    <span>73,Saraswat Enclave Agra</span>
+                           
+                    </a>
+                </li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+</div>
+<center><small class="rights"><span>&#174;</span> E-mart All Rights Reserved 2021.</small></center>
 </footer>
-
 {%endblock%} {% block js %}
 <script>
     //  document.write("hello")
