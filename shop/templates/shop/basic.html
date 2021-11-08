@@ -41,8 +41,19 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <!-- <li class="nav-item dropdown">
+            
+            <form class="form-inline my-2 my-lg-0" method='get' action='/shop/search'  style=" display: block;margin-left: auto; margin-right: auto;">
+                <div class="input-group">
+                 <input class="form-control" style="border: 1px solid #656c8a; width: 290px;" type="search" name="search" id="search" placeholder="Search products,brands and more" aria-label="Search">
+                 <div class="input-group-prepend mt-2">
+                     <button id="button-addon2" type="submit" class="btn" style="background-color: rgb(224, 223, 223); border-radius: 0px 5px 5px 0 ;margin-top: -8px;">
+                       <i class="fa fa-search"></i>
+                     </button>
+                   </div>
+                 </div>
+               </form>
+               <ul class="navbar-nav mr-auto">
+                <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 More
               </a>
@@ -57,26 +68,16 @@
                            Login
                           </button></a>
                     </div>
-                </li> -->
+                </li>
 
             </ul>
-            <form class="form-inline my-2 my-lg-0" method='get' action='/shop/search'  style=" display: block;margin-left: auto; margin-right: auto;">
-                <div class="input-group">
-                 <input class="form-control" style="border: 1px solid #656c8a;" type="search" name="search" id="search" placeholder="Search Products" aria-label="Search">
-                 <div class="input-group-prepend mt-2">
-                     <button id="button-addon2" type="submit" class="btn" style="background-color: rgb(224, 223, 223); border-radius: 0px 5px 5px 0 ;margin-top: -8px;">
-                       <i class="fa fa-search"></i>
-                     </button>
-                   </div>
-                 </div>
-               </form>
             <!-- <form method='get' action='/shop/search' class="form-inline my-2 my-lg-0">
                 <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form> -->
             <button type="button" class="btn btn-secondary mx-2" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
                 <span style='font-size:20px;'>&#128722;</span>
-             cart(<span id="cart">0 </span>)
+             cart(<span id="cart"> 0 </span>)
           </button>
         </div>
     </div>
