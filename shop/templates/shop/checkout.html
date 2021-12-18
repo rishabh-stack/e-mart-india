@@ -1,65 +1,126 @@
 {% extends 'shop/basic.html' %} {%block title%} Checkout{% endblock %} {%block body%}
-<div class="container" style="margin-top: 100px;">
-    <div class="col my-2">
-        <h2>Step 1-E-mart express Checkout-Review your cart items</h2>
-        <div id="items">
-            <ul class="list-group">
+<div class="container mt-5">
 
-            </ul>
-        </div>
+    <div class="row mt-5">
+         <div class="col-md-6 mt-5">
+       <div class="alert alert-warning mb-0 " style="border-radius: 7px;" role="alert">
+         Please complete the booking within : <span id="clockdiv"></span>
+       </div>
+         </div>
+         <div class="col-md-6 mt-5">
+         <div class="alert alert-light mb-0 py-1 pr-0" >
+           <div class="row">
+           <div class="col-md-6 mt-1">
+         Need Support? Call Us Now.
+       </div>
+       <div class="col-md-6">
+         <button type="button" class="btn bg-white text-danger " onclick="location.href='tel:9520313045'" style="border: 1px solid #ee4347">+91-9520313045<i class="fas fa-headset mr-2 ml-3" aria-hidden="true"></i>Support</button>
+       </div>  
+       </div>
+       </div>
+         </div>
+       
     </div>
-    <div class="col">
-        <h2>Step 2 - Enter Address and other details</h2>
-
-        <form action="/shop/checkout/" method="post">
-            {%csrf_token%}
-            <input type="hidden" name="itemsJson" id="itemsJson">
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputname">Name</label>
-                    <input type="name" class="form-control" id="name" name="name" required>
-                </div>
-                <div class="form-group col-md-6">
-
-                    <label for="inputEmail4">Email *</label>
-                    <input type="email" class="form-control" id="email" name="email" required>
-                </div>
+   <div class="row">
+     <div class="col-md-6 order-md-1 p-3" >
+       <div class="p-3" style="background-color: white;border-radius: 7px;">
+         <h4 class="d-flex justify-content-between align-items-center mb-2">
+           <span class="text-muted">Booking Summary</span>
+         </h4>
+         <ul class="list-group mb-3 mt-3">
+            <div id="items">
             </div>
-            <div class="form-group">
-                <label for="phone">phone *</label>
-                <input type="tel" class="form-control" id="phone" name="phone" placeholder="phone" required>
-            </div>
-            <div class="form-group">
-                <label for="inputAddress">Address *</label>
-                <input type="text" class="form-control" id="address" name="address" placeholder="1234 Main St" required>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    <label for="inputCity">City *</label>
-                    <input type="text" class="form-control" id="city" name="city" placeholder="city" required>
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="inputState">State *</label>
-                    <input type="text" class="form-control" id="state" name="state" placeholder="state" required>
-                </div>
-                <div class="form-group col-md-2">
-                    <label for="inputZip">Zip *</label>
-                    <input type="text" class="form-control" id="zip_code" name="zip_code" required>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="form-check">
-                    <input class="form-check-input" type="checkbox" id="gridCheck" required>
-                    <label class="form-check-label" for="gridCheck">
-              Confirm
-            </label>
-                </div>
-            </div>
-            <button id="heman" type="submit" class="btn btn-primary">Place Order</button>
-        </form>
-
-    </div>
-</div>
+           <li class="list-group-item d-flex justify-content-between lh-condensed">
+             <div>
+               <h6 class="my-0" style="display: inline;">Booking Fee & Tax :</h6>
+             </div>
+             <span class="text-muted">&#8377; 0</span>
+           </li>
+           <li class="list-group-item d-flex justify-content-between bg-light">
+   
+             <div class="text-success">
+               <h6 class="my-0">Total Discount <span id="discount_display">(Sale)</span></h6>
+             </div>
+             <span class="text-success" id="green">-&#8377;200</span>
+    
+           </li>
+           <div id="pr" style="display: none;">
+           <li class="list-group-item d-flex justify-content-between bg-light">
+   
+             <div class="text-success">
+               <h6 class="my-0">Promo Discount</h6>
+             </div>
+             <span class="text-success" id="green2"></span>
+    
+           </li>
+         </div>
+           <li class="list-group-item d-flex justify-content-between">
+             <form class="input-group" action="#" id="promoForm">{% csrf_token %}
+               <input type="text" class="form-control" placeholder="Promo code" id="promo_code" name="promo_code">
+               <div class="input-group-append redeem">
+                 <button type="submit" class="btn btn-secondary">Redeem</button>
+               </div>
+               <div class="input-group-append remove" style="display: none;">
+                 <button onclick=" location.reload();" class="btn btn-secondary">Remove</button>
+               </div>
+               <div class="invalid-feedback" id="invalid2">
+                 
+               </div>
+             </form>
+           </li>
+           <li class="list-group-item d-flex justify-content-between">
+             <span style="font-size: 20px;font-weight: 700;">Total Amount</span>
+             <span style="font-size: 20px;font-weight: 700;" >₹ <span id="tot"></span></span>
+           </li>
+         </ul>
+   
+   
+   
+     </div>
+     </div>
+     <div class="col-md-6 order-md-2 p-3" >
+       <div class="p-3" style="background-color: white;border-radius: 7px;">
+       <h4 class="d-flex justify-content-between align-items-center mb-2">
+           <span class="text-muted">Enter Address Detail</span>
+         </h4>
+       <form action="/shop/checkout/" method="post">
+         {% csrf_token %}
+         <input type="hidden" name="itemsJson" id="itemsJson">
+         <input type="hidden" name="amount" id="amount">
+         <div class="form-row">
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Name* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center">  <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name"  required></div>
+       </div><br>
+       <div class="form-row">
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center">Email* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"> <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required></div>
+       </div> <br>
+       <div class="form-row">
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Phone* </div><div class=" col-lg-4 col-md-4 col-sm-4 col-4 text-center"><input type="tel" class="form-control" id="phone" name="phone"  placeholder="Phone" required></div>
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Pin Code* </div><div class=" col-lg-4 col-md-4 col-sm-4 col-4  text-center"><input type="text" class="form-control" id="zip_code" name="zip_code"  placeholder="Pin" required></div>
+       
+        </div><br>
+       <div class="form-row">
+        <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Address* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"><textarea type="text" class="form-control" id="address"  name="address"  placeholder="Address" required></textarea></div>
+      </div><br>
+      <div class="form-row">
+        <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> City* </div><div class=" col-lg-4 col-md-4 col-sm-4 col-4  text-center"><input type="text" class="form-control" id="city" name="city"  placeholder="City/Town" required></div>
+        <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> State* </div><div class=" col-lg-4 col-md-4 col-sm-4 col-4  text-center"><input type="text" class="form-control" id="state" name="state" placeholder="State" required></div>
+      </div>
+   
+     <div class="p-3" style="background-color: white;border-radius: 7px;">
+       <div class="form-check mx-3 mt-2">
+         <input class="form-check-input" type="checkbox" id="gridCheck" required>
+         <label class="form-check-label" for="flexCheckDefault">
+           I accept E-mart Payment Policies and Terms & Conditions.
+         </label>
+       </div>
+       <button class="btn btn-primary btn-lg btn-block mt-4"  id="heman" type="submit" >Make Payment</button>
+     </div>
+   </form> 
+   </div>
+   </div>
+   <!-- kk-->
+     </div>
+   </div>
 {% endblock %} {%block js%}
 <script>
     if (localStorage.getItem("cart") == null) {
@@ -80,23 +141,34 @@
             let name = cart[item][1];
             let qty = cart[item][0];
             let price = cart[item][2];
+            let pri=cart[item][2]+500
             sum = sum + qty;
             total = total + (price * qty)
-            str = `<li class="list-group-item d-flex justify-content-between align-items-center">
-                  ${i}.)   ${name}
-                    <span class="badge badge-primary badge-pill">${qty}</span> 
-
-                </li>`
+            str=` <li class="list-group-item d-flex justify-content-between lh-condensed">
+             <div>
+               <h6 class="my-0" style="display: inline;">${name} :</h6>
+               <p class="ml-2" style="color: #EE4347;display: inline;"><span class="normal" style="
+                 text-decoration: line-through; 
+                 color: rgb(49, 49, 49);   
+                 padding-right: 10px;
+                 font-family: 'Avenir', Sans-Serif;
+                 ">₹ ${pri}
+             </span> <span class="pr" style=" font-weight:700;font-size: 16px;color: #EE4347"> ₹
+                ${price}
+                 </span></p>
+             </div><span class="text-muted ml-4" style="display: inline;"> ${price} x <span class="badge badge-primary badge-pill">${qty}</span></span>
+           </li>`
 
             $('#items').append(str);
 
             i = i + 1;
         }
+        $('#tot').html(total-200);
         console.log(total);
-        str2 = ` <div class="alert alert-secondary" role="alert">
-                Your Cart Total is <b> Rs. ${total} </b> .Enter your details below & place your order. Thanks for using E-mart.
-            </div>`
-        $('#items').append(str2);
+        // str2 = ` <div class="alert alert-secondary" role="alert">
+        //         Your Cart Total is <b> Rs. <span id='total-price'>${total}</span> </b> .Enter your details below & place your order. Thanks for using E-mart.
+        //     </div>`
+        // $('#items').append(str2);
     }
     document.getElementById("cart").innerHTML = sum;
 
@@ -107,6 +179,45 @@
     localStorage.clear();
     document.location = "/shop";
     "{% endif %}"
+    $('#amount').val($('#tot').html())
 </script>
+<script>
+    // 10 minutes from now
+    if (sessionStorage.getItem("counter")) {
+         
+      var time_in_minutes = sessionStorage.getItem("counter");
+        } 
+      else {
+        var time_in_minutes = 10;
+        }
+    var current_time = Date.parse(new Date());
+    var deadline = new Date(current_time + time_in_minutes*60*1000);
+    
+    
+    function time_remaining(endtime){
+        var t = Date.parse(endtime) - Date.parse(new Date());
+        var seconds = Math.floor( (t/1000) % 60 );
+      if (seconds / 10 <1){
+        seconds = '0'+seconds
+      }
+        var minutes = Math.floor( (t/1000/60) % 60 );
+        var hours = Math.floor( (t/(1000*60*60)) % 24 );
+        var days = Math.floor( t/(1000*60*60*24) );
+        return {'total':t, 'days':days, 'hours':hours, 'minutes':minutes, 'seconds':seconds};
+    }
+    function run_clock(id,endtime){
+        var clock = document.getElementById(id);
+        function update_clock(){
+            var t = time_remaining(endtime);
+            clock.innerHTML = t.minutes +':'+ t.seconds;
+        sessionStorage.setItem("counter", t.minutes);
+            if(t.total<=0){ clearInterval(timeinterval);sessionStorage.removeItem('counter');window.location.href = '/';
+                alert("You session has expired due to no activity."); }
+        }
+        update_clock(); // run function once at first to avoid delay
+        var timeinterval = setInterval(update_clock,1000);
+    }
+    run_clock('clockdiv',deadline);
+    </script>
 
 {% endblock %}

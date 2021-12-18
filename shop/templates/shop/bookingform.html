@@ -66,7 +66,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav text-uppercase ml-auto">
-          <h2>{{postData.product}}</h2>
+          <h2>Name</h2>
        
    </ul>
     </div>
@@ -104,11 +104,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       <div class="row mx-2 mb-2" style="display: flex;">
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 p-0 mt-2">
           <h6 class="my-0 p-0" style="display: inline;"><i class="fa fa-calendar" aria-hidden="true"></i> Date : </h6>
-          <span class="text-muted " style="display: inline;">{{postData.date}}</span>
+          <span class="text-muted " style="display: inline;">Date</span>
         </div>
         <div class="col-lg-6 col-md-6 col-sm-6 col-6 p-0 mt-2">
           <h6 class="my-0" style="display: inline;"><i class="fa fa-users" aria-hidden="true"></i> Guests : </h6>
-          <span class="text-muted ml-2" style="display: inline;">{{postData.number}} Adult<div id="children2" style="display: inline;">,{{postData.number2}} Child</div></span>
+          <span class="text-muted ml-2" style="display: inline;">number Adult<div id="children2" style="display: inline;">,number Child</div></span>
         </div>
         
       </div>
@@ -127,19 +127,19 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               color: rgb(49, 49, 49);   
               padding-right: 10px;
               font-family: 'Avenir', Sans-Serif;
-              ">₹ {{postData.adultPrice}}
+              ">₹ price
           </span> <span class="pr" style=" font-weight:700;font-size: 16px;color: #EE4347"> ₹
-            {{postData.adultPrice2}}
+            price
               </span></p>
             
           </div>
-          <span class="text-muted ml-4" style="display: inline;">{{postData.adultPrice}} x {{postData.number}} </span>
+          <!-- <span class="text-muted ml-4" style="display: inline;">{{postData.adultPrice}} x {{postData.number}} </span>
 
-          <span class="text-muted">&#8377; {% widthratio postData.adultPrice 1 postData.number %}</span>
+          <span class="text-muted">&#8377; {% widthratio postData.adultPrice 1 postData.number %}</span> -->
         </li>
 
         <div id="children">
-        <li  class="list-group-item d-flex justify-content-between lh-condensed">
+        <!-- <li  class="list-group-item d-flex justify-content-between lh-condensed">
           <div>
             <h6 class="my-0" style="display: inline;">Child :</h6>
             <p class="ml-2" style="color: #EE4347;display: inline;"><span class="normal" style="text-decoration: line-through;color: rgb(49, 49, 49);   padding-right: 10px;
@@ -151,7 +151,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <span class="text-muted ml-4" style="display: inline;">{{postData.childPrice}} x {{postData.number2}} </span>
 
           <span class="text-muted">&#8377; {% widthratio postData.childPrice 1 postData.number2 %}</span>
-        </li>
+        </li> -->
       </div>
 
         <li class="list-group-item d-flex justify-content-between lh-condensed">
@@ -165,7 +165,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <div class="text-success">
             <h6 class="my-0">Total Discount <span id="discount_display">(Sale)</span></h6>
           </div>
-          <span class="text-success" id="green">-&#8377;{{postData.discount}}</span>
+          <span class="text-success" id="green">-&#8377;Discount</span>
  
         </li>
         <div id="pr" style="display: none;">
@@ -181,9 +181,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <li class="list-group-item d-flex justify-content-between">
           
           <form class="input-group" action="#" id="trackerForm">{% csrf_token %}
-            <input type="number" class="form-control" placeholder="Use UA Cash(In Rs)" id="wallet_promo" name="wallet_promo">
+            <!-- <input type="number" class="form-control" placeholder="Use UA Cash(In Rs)" id="wallet_promo" name="wallet_promo">
             <input type="hidden" class="form-control" value="{{postData.number}}" name="adult_promo">
-            <input type="hidden" class="form-control" value="{{postData.number2}}" name="child_promo">
+            <input type="hidden" class="form-control" value="{{postData.number2}}" name="child_promo"> -->
             <div class="input-group-append redeem2">
               <button type="submit" class="btn btn-secondary">Use</button>
             </div>
@@ -191,7 +191,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <button onclick=" location.reload();" class="btn btn-secondary">Remove</button>
             </div>
             <div class="invalid-feedback" id="invalid">
-              *maximum allowed discount on this product is Rs {{postData.max_discount}} per person.
+              *maximum allowed discount on this product is Rs {max_discount} per person.
             </div>
           </form>
        
@@ -212,7 +212,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </li>
         <li class="list-group-item d-flex justify-content-between">
           <span style="font-size: 20px;font-weight: 700;">Total Amount</span>
-          <span style="font-size: 20px;font-weight: 700;" >₹ <span id="tot">{{postData.amount}}</span></span>
+          <span style="font-size: 20px;font-weight: 700;" >₹ <span id="tot">{postData.amount}</span></span>
         </li>
       </ul>
 
@@ -227,20 +227,20 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
       </h4>
     <form method="post" action="/checkout/">
       {% csrf_token %}
-      <input type="hidden" name="orderid" id="orderid" value="{{postData.id}}">
+      <!-- <input type="hidden" name="orderid" id="orderid" value="{{postData.id}}"> -->
       <div class="row">
-      <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Name* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center">  <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{postData.customerName}}"  required></div>
+      <!-- <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Name* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center">  <input type="text" class="form-control" placeholder="Enter Name" name="name" value="{{postData.customerName}}"  required></div>
     </div><br>
     <div class="row">
-      <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center">Email* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"> <input type="email" class="form-control" name="email" value="{{postData.customerEmail}}" placeholder="you@example.com" required></div>
+      <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center">Email* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"> <input type="email" class="form-control" name="email" value="{{postData.customerEmail}}" placeholder="you@example.com" required></div> -->
     </div> <br>
     <div class="row">
       <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Phone* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"><input type="tel" class="form-control" id="phone"  name="phone"  placeholder="Phone" required></div>
     </div>
-    <input type="hidden" name="number" value="{{postData.number}}" />
+    <!-- <input type="hidden" name="number" value="{{postData.number}}" />
     <input type ="hidden" id="amount" name="amount" value="{{postData.amount}}" />
     <input type ="hidden" name="date" value="{{postData.date}}" />
-    <input type ="hidden" id="coupon_id"  name="coupon_id" value="" />
+    <input type ="hidden" id="coupon_id"  name="coupon_id" value="" /> -->
      
   </div>
 
@@ -250,7 +250,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="p-2" style="border: 1px solid black;border-radius: 7px;">
       <div class="custom-control custom-radio">
         <input id="credit" name="paymentMethod" onclick="amount1()" type="radio" class="custom-control-input"  required>
-        <label class="custom-control-label" for="credit">Pay Full Amount<br><h4 id="totprice">INR {{postData.amount}}</h4></label>
+        <label class="custom-control-label" for="credit">Pay Full Amount<br><h4 id="totprice">INR {postData.amount}</h4></label>
       </div>
     </div>
       </div>
