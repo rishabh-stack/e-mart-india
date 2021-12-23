@@ -33,6 +33,11 @@ ALLOWED_HOSTS = ['127.0.0.1','e-mart-india.herokuapp.com']
 # Application definition
 
 INSTALLED_APPS = [
+    'django.contrib.sites',
+    'allauth',
+    'allauth.account',
+    'allauth.socialaccount',
+    'rest_framework',
     'shop.apps.ShopConfig',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,7 +45,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'blog'
+    'blog',
+    'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
 ]
 
 MIDDLEWARE = [
@@ -52,6 +59,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+AUTHENTICATION_BACKENDS = [
+    
+    'django.contrib.auth.backends.ModelBackend',
+    'allauth.account.auth_backends.AuthenticationBackend',
+    
+]
+# SOCIAL_AUTH_FACEBOOK_KEY ='973038943632263'
+# SOCIAL_AUTH_FACEBOOK_SECRET ='dc594373dbcb565e57ca24980c4e3622'
 
 ROOT_URLCONF = 'ecom.urls'
 
@@ -113,6 +129,8 @@ TIME_ZONE = 'UTC'
 
 USE_I18N = True
 
+SITE_ID = 1
+
 USE_L10N = True
 
 USE_TZ = True
@@ -126,3 +144,5 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 #managing media
 MEDIA_ROOT=os.path.join(BASE_DIR,'media')
 MEDIA_URL='/media/'
+LOGIN_REDIRECT_URL='/'
+ACCOUNT_LOGOUT_ON_GET=True

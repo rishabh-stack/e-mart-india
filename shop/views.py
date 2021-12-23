@@ -5,8 +5,9 @@ from django.contrib import messages
 from math import ceil
 from .models import Product,Contact,Order,OrderUpdate
 from django.contrib.auth import authenticate,login,logout
+from django.contrib.auth.decorators import login_required
 import json
-
+LOGIN_REDIRECT_URL2 = '/accounts/login'
 # Create your views here.
 
 def index(request):
@@ -64,6 +65,8 @@ def contact(request):
         contact.save()
         thanks=True
     return render(request,"shop/contact.html", {'thanks':thanks})
+
+@login_required(login_url=LOGIN_REDIRECT_URL2)
 def checkout(request):
     if  request.method=="POST":
         items_json=request.POST.get("itemsJson","")

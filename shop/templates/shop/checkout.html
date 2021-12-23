@@ -88,10 +88,10 @@
          <input type="hidden" name="itemsJson" id="itemsJson">
          <input type="hidden" name="amount" id="amount">
          <div class="form-row">
-         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Name* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center">  <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name"  required></div>
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Name* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center">  <input type="text" class="form-control" placeholder="Enter Name" id="name" name="name" value="{{user.name}}"  required></div>
        </div><br>
        <div class="form-row">
-         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center">Email* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"> <input type="email" class="form-control" id="email" name="email" placeholder="you@example.com" required></div>
+         <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center">Email* </div><div class=" col-lg-10 col-md-10 col-sm-10 col-10  text-center"> <input type="email" class="form-control" id="email" name="email" value="{{user.email}}" placeholder="you@example.com" required></div>
        </div> <br>
        <div class="form-row">
          <div class=" col-lg-2 col-md-2 col-sm-2 col-2  text-center"> Phone* </div><div class=" col-lg-4 col-md-4 col-sm-4 col-4 text-center"><input type="tel" class="form-control" id="phone" name="phone"  placeholder="Phone" required></div>

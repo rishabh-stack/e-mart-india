@@ -1,3 +1,4 @@
+{% load socialaccount %}
 <!doctype html>
 <html lang="en">
 
@@ -45,7 +46,7 @@
             
             <form class="form-inline my-2 my-lg-0" method='get' action='/shop/search'  style=" display: block;margin-left: auto; margin-right: auto;">
                 <div class="input-group">
-                 <input class="form-control" style="border: 1px solid #656c8a; width: 290px;" type="search" name="search" id="search" placeholder="Search products,brands and more" aria-label="Search">
+                 <input class="form-control" style="border: 1px solid #656c8a; width: 210px;" type="search" name="search" id="search" placeholder="Search products,brands and more" aria-label="Search">
                  <div class="input-group-prepend mt-2">
                      <button id="button-addon2" type="submit" class="btn" style="background-color: rgb(224, 223, 223); border-radius: 0px 5px 5px 0 ;margin-top: -8px;">
                        <i class="fa fa-search"></i>
@@ -54,31 +55,33 @@
                  </div>
                </form>
                <ul class="navbar-nav mr-auto">
-                <li class="nav-item dropdown">
+            {% if user.is_authenticated %}
+                <li class="nav-item active dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                More
+                    Hello, {{user}}
               </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                      <a class="dropdown-item" href="/shop/tracker"><b>Track Order </b></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#signModel">
-                            SignUp
-                          </button></a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item"><button type="button" class="btn btn-primary" data-toggle="modal" data-target="#loginModel">
-                           Login
-                          </button></a>
+                      <a class="dropdown-item" href="/shop/tracker"><i class="fas fa-user"></i> View Profile</a>
+                      <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/shop/tracker"><i class="fas fa-truck-moving"></i> Track Order</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/accounts/logout"><i class="fas fa-power-off"></i> Logout</a>
+                <!-- <div class="dropdown-divider"></div>
+                <a class="dropdown-item"><button type="button" class="btn btn-success" data-toggle="modal" data-target="#signModel">
+                  SignUp
+                </button></a> -->
                     </div>
                 </li>
+                {% else %}
+                <li class="nav-item"><button type="button" class="btn btn-light" data-toggle="modal" data-target="#loginModel">Login
+                 </button></li>
+
+                {% endif %}
 
             </ul>
-            <!-- <form method='get' action='/shop/search' class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="search" id="search">
-                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-            </form> -->
-            <button type="button" class="btn btn-secondary mx-2" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
-                <span style='font-size:20px;'>&#128722;</span>
-             cart(<span id="cart"> 0 </span>)
+            <button type="button" class="btn btn-secondary" id="popcart" data-html="true" data-container="body" data-toggle="popover" data-placement="bottom">
+              <i class="fas fa-shopping-cart"></i>
+             cart <span class="badge badge-primary badge-pill" id="cart"> 0 </span>
           </button>
         </div>
     </div>
@@ -173,15 +176,6 @@
         </div>
         </div>
   </div>
-    <!--  -->
-    {% for message in messages %}
-    <div class="alert alert-warning alert-dismissible fade show" role="alert">{{messages.tags}}
-        <strong>{{message}}</strong>
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-      <span aria-hidden="true">&times;</span>
-    </button>
-    </div>
-    {% endfor%}
     <!-- SignUp modal -->
     <div class="modal fade" id="signModel" tabindex="-1" role="dialog" aria-labelledby="signModelLabel" aria-hidden="true">
         <div class="modal-dialog">
@@ -224,31 +218,51 @@
     </div>
     <!-- login modal -->
     <div class="modal fade" id="loginModel" tabindex="-1" role="dialog" aria-labelledby="loginModelLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="loginModelLabel">Login</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-                </div>
-                <div class="modal-body">
-                    <form method="post" action="login">{% csrf_token %}
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Username</label>
-                            <input type="text" class="form-control" name="loginusername" id="loginusername">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleFormControlInput1">Password</label>
-                            <input type="password" class="form-control" name="loginpassword" id="loginpassword" placeholder="Enter your password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Login</button>
-                    </form>
-                </div>
+      <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signModelLabel">E-Mart</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+          </div>
+              <div class="modal-body">
+                <h3>Sign-In</h3>
+                <!-- <form method="post" action="login">{% csrf_token %}
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">Username</label>
+                      <input type="text" class="form-control" name="loginusername" id="loginusername">
+                  </div>
+                  <div class="form-group">
+                      <label for="exampleFormControlInput1">Password</label>
+                      <input type="password" class="form-control" name="loginpassword" id="loginpassword" placeholder="Enter your password">
+                  </div>
+                  <button type="submit" class="btn btn-primary">Login</button>
+              </form> -->
+                  <div class="row mt-4">
+                    <div class="col-6">
+                      <a href="{% provider_login_url "google" %}" process="connect"
+                      class="btn btn-block btn-social btn-google"
+                      style="background-color:red;text-align:center;color:white">
+                      <i class="fab fa-google"></i>
+                  
+                      Sign in with Google
+                  </a>
+                    </div>
+                    <div class="col-6">
+                      <a href="{% provider_login_url "facebook" %}" process="connect"
+                      class="btn btn-block btn-social btn-google"
+                      style="background-color:blue;text-align:center;color:white">
+                      <i class="fab fa-facebook"></i>
+                      Sign in with Facebook
+                  </a>
+                    </div>
+                  </div>
 
-            </div>
-        </div>
-    </div>
+              </div>
+          </div>
+      </div>
+  </div>
 
 
     {%block body%}{% endblock %}
